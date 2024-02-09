@@ -39,7 +39,9 @@ document.getElementById("create-form").addEventListener("submit",function(e){
 
     const email=document.getElementById("email-create-input").value;
     const password=document.getElementById("Password-create-input").value;
+    const confirmPassword = document.getElementById("confirm-password-input").value;
 
+    
   if(email.length <5) {
   alert("opps! preencha com e-mail valido.");
   return;
@@ -49,6 +51,11 @@ document.getElementById("create-form").addEventListener("submit",function(e){
     alert("preencha a senha com minino 4 digitos.");
     return;
   }
+  if (password !== confirmPassword) {
+    alert("As senhas não coincidem!");
+    return;    
+}
+ 
 
   saveAccount({
   login: email,

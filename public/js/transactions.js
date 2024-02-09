@@ -16,7 +16,7 @@ document.getElementById("transaction-form").addEventListener("submit",function(e
     const value=parseFloat(document.getElementById("value-input").value);
     const description=document.getElementById("description-input").value;
     const date=document.getElementById("date-input").value;
-    const type=document.querySelector('input[name="type-input"]:checked').value;
+   
 
     data.transactions.unshift({ 
         value: value, type: type, description:description, date:date
@@ -27,10 +27,20 @@ document.getElementById("transaction-form").addEventListener("submit",function(e
      myModal.hide();
 
       getTransactions();
+      checkBalance();
 
- 
+      function checkBalance() {
+    const totalBalance = data.transactions.reduce((acc, item) => acc + (item.type === "1" ? item.value : -item.value), 0);
+    console.log(totalBalance)
+    if (totalBalance < 0) {
+        alert("Atenção. Seu saldo após cadastrar essa despesa será negativo, deseja continuar ?");
+    }
+}
+
+
      alert("Lançamento adicionado com sucesso.");
-});
+
+    });
 
       checkLogged();
 
@@ -93,3 +103,5 @@ document.getElementById("transaction-form").addEventListener("submit",function(e
     function saveData(data){
     localStorage.setItem(data.login, JSON.stringify(data));
 }
+
+
